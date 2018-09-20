@@ -1,16 +1,27 @@
 class Brewery < ApplicationRecord
-    has_many :beers, dependent: :destroy
-    has_many :ratings, through: :beers
-    include RatingAverage
+  include RatingAverage
+  has_many :beers, dependent: :destroy
+  has_many :ratings, through: :beers
 
-    def print_report
-        puts name
-        puts "established at year #{year}"
-        puts "number of beers #{beers.count}"
-      end
+  validates :name, presence: true
+  validates :year, numericality: { greater_than_or_equal_to: 1040,
+                                   only_integer: true }
+  validate :year_cannot_be_in_the_future
 
-    def restart
-        self.year = 2018
-        puts "changed year to #{year}"
+  def print_report
+    puts name
+    puts "established at year #{year}"
+    puts "number of beers #{beers.count}"
+  end
+
+  def restart
+    self.year = 2018
+    puts "changed year to #{year}"
+  end
+
+  def year_cannot_be_in_the_future
+    if year? && year > Date.today.year
+      errors.add(:year, "can't be in the future")
     end
+  end
 end

@@ -1,16 +1,19 @@
 class Beer < ApplicationRecord
-    belongs_to :brewery
-    has_many :ratings, dependent: :destroy
-    include RatingAverage
+  include RatingAverage
+  belongs_to :brewery
+  has_many :ratings, dependent: :destroy
+  has_many :raters, -> { distinct }, through: :ratings, source: :user
 
-  # def average_rating
-   #  sum = ratings.sum(&:score) #okay?
- #    sum = ratings.map(&:score).sum #ratings.average
-  #   sum.to_f/ratings.count
-  # end
+  validates :name, presence: true
 
-   def to_s
-     name + " #{self.brewery.name} "
-   end
+  def to_s
+    name + " #{brewery.name}"
+  end
 
+  def average
+    # binding.pry
+    return 0 if ratings.empty?
+
+    ratings.map(&:score).sum / ratings.count.to_f
+  end
 end

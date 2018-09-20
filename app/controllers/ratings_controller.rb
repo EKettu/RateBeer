@@ -1,25 +1,29 @@
 class RatingsController < ApplicationController
- 
-    def index
-        @ratings = Rating.all
-      end
-
-      def new
-        @rating = Rating.new
-        @beers = Beer.all
-      end
-
-      def create
-       # binding.pry
-       # byebug
-       Rating.create params.require(:rating).permit(:score, :beer_id)
-       redirect_to ratings_path
-      end
-
-      def destroy
-        rating = Rating.find(params[:id])
-        rating.delete
-        redirect_to ratings_path
-      end
-
+  def index
+    @ratings = Rating.all
   end
+
+  def new
+    @rating = Rating.new
+    @beers = Beer.all
+  end
+
+  def create
+    # binding.pry
+    # byebug
+    @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
+    @rating.user = current_user
+    if @rating.save
+    redirect_to user_path current_user
+  else
+    @beers = Beer.all
+    render :new
+  end
+  end
+
+  def destroy
+    rating = Rating.find(params[:id])
+    rating.delete
+    redirect_to user_path(current_user)
+  end
+end
