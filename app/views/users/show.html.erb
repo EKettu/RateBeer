@@ -21,6 +21,12 @@
   <% end %>
 </ul>
 
+<p><strong>Favorite style:</strong></p>
+<%= @user.favorite_style%>
+
+<p><strong>Favorite brewery:</strong></p>
+<%= @user.favorite_brewery%>
+
 <p><strong>Clubs:</strong></p>
 <% @user.beer_clubs.each do |beer_club| %>
   <%= link_to beer_club.name, beer_club %>
