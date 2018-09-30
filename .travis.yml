@@ -1,8 +1,13 @@
 language: ruby
-
 rvm:
 - 2.5.1
-
 script:
 - bundle exec rails db:migrate
 - bundle exec rspec -fd spec
+deploy:
+  provider: heroku
+  api_key:
+    secure: QLFqhBQp+OFmaNinwIuIvvBxg4cjqHBrxrUUztj9rowmgGTq5pQHOvxib03NfejpzN0d8cZDGdRrsfWt8Qtuy7/0cUbhbWPU8FDFKk5XmKePphcWw3R/HiXsg2qDKqOg6VrRBwHHs6LYECZMRnBnoBv417Ih2H5cCbN9xMP9Dk3RphhaNfu5H+IeMWsVOZIHp897C9FM5TX9cIbAtmyEzuBE8Gy1ytjt5SCKTDH2yYarbkqSkjcB5Z33vzs6stgcsSGIDzIt/Rha5DimRYm1NU+kvMIVzcwSnp9LheGz3xbSXjGKYb3gUlvUytBNO/1VK3G1TwdQkJNotx5BwMUbXpsTBEVtb1A4UUmhlFX0/quQ0iwtJYyZL7mNxtui0ldw0/IMDBX5pPtMPJ+952mVpbvkEWhk6pjQ1/6SOToHZgYv1Fw4p1Dc+YXo05/qX/ALV/5SzmgUns/z7Cm9ef3/KQxbVBDMcPcL28YM3C0eoYiobdTB+IjzmovxQnsY3RyzsF4m1Q+2qP7dCCVikKu1OLGBc7mu7o3h2bvM2kWEz9NgnX5CGieOy0XtDI5Kd769qnC8jIKz14yypvG5vpcqVcYr+E2KNeq75bjIWutzdnfT+PtcF+SXGvrdsUmoloC0EfbJKL93H4e3reCx24UbePpdsaqJUHvbJnSpiivYQz8=
+  app: radiant-citadel-84056
+  on:
+    repo: EKettu/RateBeer
