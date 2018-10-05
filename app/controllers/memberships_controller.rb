@@ -28,10 +28,11 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(membership_params)
     @membership.user_id = current_user.id
-
+    @membership.user = current_user
+    # byebug
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+        format.html { redirect_to @membership.beer_club, notice: "#{@membership.user.username} welcome to the club." }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
@@ -57,9 +58,11 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
+    user = current_user
+    @beer_club = @membership.beer_club
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to user, notice: "Membership in #{@beer_club.name} was successfully destroyed." }
       format.json { head :no_content }
     end
   end

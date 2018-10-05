@@ -19,6 +19,20 @@ describe "Rating" do
     sign_in(username:"Pekka", password:"Foobar1")
   end
 
+  it "when given, is registered to the beer and user who is signed in" do
+    visit new_rating_path
+    select('iso 3', from:'rating[beer_id]')
+    fill_in('rating[score]', with:'15')
+
+    expect{
+      click_button "Create Rating"
+    }.to change{Rating.count}.from(5).to(6)
+
+    expect(user.ratings.count).to eq(4)
+    expect(beer1.ratings.count).to eq(2)
+    expect(beer1.average_rating).to eq(9.5)
+  end
+
   it "ratings are listed on the ratings page" do
     visit ratings_path
     expect(page).to have_content "List of ratings"
