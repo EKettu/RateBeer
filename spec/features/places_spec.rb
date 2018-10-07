@@ -5,6 +5,8 @@ describe "Places" do
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ Place.new( name:"Oljenkorsi", id: 1 ) ]
     )
+    allow(BeermappingApi).to receive(:weather_in).with("kumpula").and_return(nil
+    )
 
     visit places_path
     fill_in('city', with: 'kumpula')
@@ -17,6 +19,8 @@ describe "Places" do
     allow(BeermappingApi).to receive(:places_in).with("Helsinki").and_return(
       [Place.new( name:"Oljenkorsi", id: 1 ), Place.new( name:"Olvi", id: 2 ), Place.new( name:"Olki", id: 3 )  ]
     )
+    allow(BeermappingApi).to receive(:weather_in).with("Helsinki").and_return(nil
+    )
 
     visit places_path
     fill_in('city', with: 'Helsinki')
@@ -28,13 +32,15 @@ describe "Places" do
   end
 
   it "if none are returned by the API, a notice is shown at the page" do
-    allow(BeermappingApi).to receive(:places_in).with("Kilpisjärvi").and_return([]
+    allow(BeermappingApi).to receive(:places_in).with("Juankoski").and_return([]
     )
+    allow(BeermappingApi).to receive(:weather_in).with("Juankoski").and_return(nil
+      )
 
     visit places_path
-    fill_in('city', with: 'Kilpisjärvi')
+    fill_in('city', with: 'Juankoski')
     click_button "Search"
 
-    expect(page).to have_content "No locations in Kilpisjärvi"
+    expect(page).to have_content "No locations in Juankoski"
   end
 end
