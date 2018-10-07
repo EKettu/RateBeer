@@ -18,7 +18,7 @@ FactoryBot.define do
     
       factory :beer do
         name { "anonymous" }
-        style { "Lager" } 
+        style
         brewery
       end
     
@@ -26,5 +26,10 @@ FactoryBot.define do
         beer
         user
         score {4}
+      end
+
+      factory :style do
+        name { "Lager" }
+        description { "good"}
       end
   end

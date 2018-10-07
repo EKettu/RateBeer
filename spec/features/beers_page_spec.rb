@@ -9,6 +9,7 @@ describe "Beer" do
   end
 
   let!(:brewery) { FactoryBot.create :brewery, name:"Koff" }
+  let!(:style) {FactoryBot.create :style, name:"Lager"}
 
   it "when a new beer with a name is created, it is added to the system" do
     visit new_beer_path

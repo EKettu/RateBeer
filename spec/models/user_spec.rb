@@ -76,7 +76,8 @@ RSpec.describe User, type: :model do
     
     it "is the one with highest rating if several rated" do
       create_beers_with_many_ratings({user: user}, 10, 20, 15, 7, 9)
-      best = create_beer_with_style({ user: user }, 25, "IPA" )
+      style = FactoryBot.create(:style)
+      best = create_beer_with_style({ user: user }, 25, style )
 
       expect(user.favorite_style).to eq(best.style)
     end    
