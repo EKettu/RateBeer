@@ -1,15 +1,58 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
-<h1>List of ratings</h1>
+<h1>Ratings</h1>
+<div class="row">
+    <div class="row">
+        <div class="col-6 col-sm-4">
+        <h2>Best breweries</h2>
+        <%= render 'list', items: @top_breweries %>
+        </div>
+        <div class="col-4 col-sm-4">
+        <h2>Best beers</h2>
+        <%= render 'list', items: @top_beers %>
+        </div>
+        <div class="col-2 col-sm-4">
+        <h2>Best styles</h2>
+        <%= render 'list', items: @top_styles %>
+        </div>
+    </div>
+    <h2>Most active users</h2>
+<table class="table table-hover">
+    <thead>
+    <th></th>  
+    <th>ratings</th>             
+    </thead>
+    <% @top_users.each do |user| %>
+        <tr>
+            <td><%= link_to user.username, user %> </td>
+            <td><%= user.ratings.count %></td>    
+        </tr>
+        <% end %>
+</table>
+</div>
 
+<h2>Most active users</h2>
+<table class="table table-hover">
+    <thead>
+    <th></th>  
+    <th>ratings</th>             
+    </thead>
+    <% @top_users.each do |user| %>
+        <tr>
+            <td><%= link_to user.username, user %> </td>
+            <td><%= user.ratings.count %></td>    
+        </tr>
+        <% end %>
+</table>
+
+
+<h3>recent ratings</h3>
 <ul>
  <% @ratings.each do |rating| %>
    <li> <%= rating %> <%= link_to rating.user.username, user_path(rating.user.id) %> </li>
  <% end %>
 </ul>
 
-
 <br>
-<p> Number of ratings: <%= @ratings.count %> </p>
 <br>
-<%= link_to('New Rating', new_rating_path) if current_user %>
+<%= link_to('New Rating', new_rating_path, class:"btn btn-primary") if current_user %>

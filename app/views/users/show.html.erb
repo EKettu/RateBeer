@@ -1,11 +1,11 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
 <p>
   <H1><%= @user.username %></H1>
   <% if @user.ratings.empty? %>
  <p> Has made no ratings yet </p>
 <% else %>
-  <p>Has made <%=@user.ratings.count%> <%="rating".pluralize(@user.ratings.count)%>, average rating <%= @user.average_rating%> </p>
+  <p>Has made <%=@user.ratings.count%> <%="rating".pluralize(@user.ratings.count)%>, average rating <%= round(@user.average_rating)%> </p>
 <% end %>
 </p>
 
@@ -36,9 +36,6 @@
 <% end %>
 </p>
 
-<% if current_user == @user%>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<%= edit_and_destroy_buttons(@user) %>
 
 <%= link_to 'Back', users_path %>
