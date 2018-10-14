@@ -1,6 +1,7 @@
 class BreweriesController < ApplicationController
-  before_action :set_brewery, only: [:show, :edit, :update, :destroy]
+  before_action :set_brewery, only: [:show, :edit, :update]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_admin, only: [:destroy]
   # before_action :authenticate, only: [:destroy]
 
   # GET /breweries
@@ -28,10 +29,10 @@ class BreweriesController < ApplicationController
   def toggle_activity
     brewery = Brewery.find(params[:id])
     brewery.update_attribute :active, (not brewery.active)
-  
+
     new_status = brewery.active? ? "active" : "retired"
-  
-    redirect_to brewery, notice:"brewery activity status changed to #{new_status}"
+
+    redirect_to brewery, notice: "brewery activity status changed to #{new_status}"
   end
 
   # POST /breweries
@@ -85,19 +86,4 @@ class BreweriesController < ApplicationController
   def brewery_params
     params.require(:brewery).permit(:name, :year, :active)
   end
-
-  # def authenticate
-  #   admin_accounts = { "pekka" => "beer", "arto" => "foobar", "matti" => "ittam", "vilma" => "kangas" }
-  #   authenticate_or_request_with_http_basic do |username, password|
-  #     if admin_accounts.include? username
-  #       if admin_accounts[username] == password
-  #         login_ok = true
-  #       end
-  #     else
-  #       login_ok = false
-  #     end
-
-  #     login_ok
-  #   end
-  # end
 end

@@ -35,10 +35,10 @@ describe "Rating" do
 
   it "ratings are listed on the ratings page" do
     visit ratings_path
-    expect(page).to have_content "List of ratings"
+    expect(page).to have_content "recent ratings"
     # save_and_open_page
     expect(page).to have_content "anonymous 4"
-    expect(page).to have_content "Number of ratings: 5"
+    # expect(page).to have_content "Number of ratings: 5"
   end
 
   it "user can see only his/her own ratings" do

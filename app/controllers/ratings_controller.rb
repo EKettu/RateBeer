@@ -13,7 +13,7 @@ class RatingsController < ApplicationController
   end
 
   def create
-    #binding.pry
+    # binding.pry
     # byebug
     @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
     @rating.user = current_user
