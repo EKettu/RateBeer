@@ -5,10 +5,7 @@ BREWERIES.show = () => {
     const table  = $("#brewerytable")
 
   BREWERIES.list.forEach((brewery) => {
-      console.log(brewery.beers.name.length)
-    //   console.log(brewery.active.name)
     let activity = ""
-    // table.append('<tr><td>' + brewery['name'] + '</td></tr>')
     if(brewery.active.name) {
         activity = "Active"
     }
@@ -22,13 +19,7 @@ BREWERIES.show = () => {
     + '<td>' + activity+ '</td>'
     + '</tr>')
   })
-
-//   $("#breweries").html('<ul>' + brewery_list.join('') + '</ul>')
 }
-
-// BREWERIES.reverse = () => {
-//   BREWERIES.list.reverse()
-// }
 
 BREWERIES.sort_by_name = () => {
     BREWERIES.list.sort((a, b) => {
@@ -78,31 +69,3 @@ document.addEventListener("turbolinks:load", () => {
         BREWERIES.show()
       })
   })
-
-
-// document.addEventListener("turbolinks:load", () => {
-//   $("#reverse").click((e) => {
-//     e.preventDefault()
-//     BREWERIES.reverse()
-//     BREWERIES.show()
-//   })
-
-//   $.getJSON('breweries.json', (breweries) => {
-//     BREWERIES.list = breweries
-//     BREWERIES.show()
-//   })
-// })
-
-
-
-// document.addEventListener("turbolinks:load", () => {
-// $.getJSON('breweries.json', (breweries) => {
-//     const brewery_list = []
-  
-//     breweries.forEach( (brewery) => {
-//       brewery_list.push('<li>' + brewery['name'] + '</li>')
-//     })
-  
-//     $("#breweries").html('<ul>'+ brewery_list.join('') + '</ul>')
-//   });
-// })
