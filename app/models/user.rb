@@ -21,6 +21,25 @@ class User < ApplicationRecord
     ratings.order(score: :desc).limit(1).first.beer
   end
 
+  # def favorite_style
+  #   favorite(:style)
+  # end
+
+  # def favorite_brewery
+  #   favorite(:brewery)
+  # end
+
+  # def favorite(groupped_by)
+  #   return nil if ratings.empty?
+
+  #   grouped_ratings = ratings.group_by{ |r| r.beer.send(groupped_by) }
+  #   averages = grouped_ratings.map do |group, ratings|
+  #     { group: group, score: average_of(ratings) }
+  #   end
+
+  #   averages.max_by{ |r| r[:score] }[:group]
+  # end
+
   def favorite_style
     return nil if ratings.empty?
 

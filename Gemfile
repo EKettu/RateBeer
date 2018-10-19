@@ -41,6 +41,8 @@ gem 'jquery-rails'
 
 gem 'httparty'
 
+gem 'rack-mini-profiler'
+
 group :development, :test do
   gem 'sqlite3'
 end

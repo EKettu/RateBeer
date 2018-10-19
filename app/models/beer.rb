@@ -1,5 +1,6 @@
 class Beer < ApplicationRecord
   include RatingAverage
+  extend TopThings
   belongs_to :brewery
   has_many :ratings, dependent: :destroy
   has_many :raters, -> { distinct }, through: :ratings, source: :user
@@ -19,8 +20,8 @@ class Beer < ApplicationRecord
     ratings.map(&:score).sum / ratings.count.to_f
   end
 
-  def self.top(n)
-    sorted_by_rating_in_desc_order = Beer.all.sort_by{ |b| -(b.average_rating || 0) }
-    sorted_by_rating_in_desc_order.slice(0, n)
-  end
+  # def self.top(n)
+  #   sorted_by_rating_in_desc_order = Beer.all.sort_by{ |b| -(b.average_rating || 0) }
+  #   sorted_by_rating_in_desc_order.slice(0, n)
+  # end
 end

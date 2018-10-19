@@ -1,9 +1,9 @@
 class RatingsController < ApplicationController
   def index
     @ratings = Rating.recent
-    @top_breweries = Brewery.top 3
-    @top_beers = Beer.top 3
-    @top_styles = Style.top 3
+    @top_breweries = Brewery.top(3, Brewery.all)
+    @top_beers = Beer.top(3, Beer.all)
+    @top_styles = Style.top(3, Style.all)
     @top_users = User.top 3
   end
 
@@ -20,7 +20,7 @@ class RatingsController < ApplicationController
     if current_user.nil?
       redirect_to signin_path, notice: 'you should be signed in'
     elsif @rating.save
-      current_user.ratings << @rating 
+      current_user.ratings << @rating
       redirect_to user_path current_user
     else
       @beers = Beer.all

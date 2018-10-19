@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    # @users = User.all
+    @users = User.includes(:ratings, :beers).all
   end
 
   # GET /users/1
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
 
     new_status = user.closed? ? "open" : "closed"
 
-    redirect_to user, notice:"user account status changed to #{new_status}"
+    redirect_to user, notice: "user account status changed to #{new_status}"
   end
 
   # POST /users

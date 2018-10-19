@@ -1,5 +1,6 @@
 class Brewery < ApplicationRecord
   include RatingAverage
+  extend TopThings
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
@@ -28,8 +29,8 @@ class Brewery < ApplicationRecord
     end
   end
 
-  def self.top(n)
-    sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -(b.average_rating || 0) }
-    sorted_by_rating_in_desc_order.slice(0, n)
-  end
+  # def self.top(n)
+  #   sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -(b.average_rating || 0) }
+  #   sorted_by_rating_in_desc_order.slice(0, n)
+  # end
 end
