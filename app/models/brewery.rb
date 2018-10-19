@@ -10,7 +10,7 @@ class Brewery < ApplicationRecord
   validate :year_cannot_be_in_the_future
 
   scope :active, -> { where active: true }
-  scope :retired, -> { where active: [nil,false] }
+  scope :retired, -> { where active: [nil, false] }
 
   def print_report
     puts name

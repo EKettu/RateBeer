@@ -93,8 +93,8 @@ class User < ApplicationRecord
     averages.key(averages.values.max)
   end
 
-  def self.top(n)
+  def self.top(how_many)
     sorted_by_rating_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count || 0) }
-    sorted_by_rating_in_desc_order.slice(0, n)
+    sorted_by_rating_in_desc_order.slice(0, how_many)
   end
 end
